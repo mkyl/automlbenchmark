@@ -174,7 +174,16 @@ TPOT:
 #    population_size: 25
 #    verbosity: 2
 
+# For internship project baseline
+NewMLNet:
+  extends: MLNet
+  params:
+    automl_type: "NNI"
 
+OldMLNet:
+  extends: MLNet
+  params:
+    automl_type: "AutoML"
 
 #######################################
 ### Non AutoML reference frameworks ###
