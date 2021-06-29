@@ -1,5 +1,6 @@
 import logging
 import os
+from pickle import HIGHEST_PROTOCOL
 
 from flaml import AutoML, __version__
 
@@ -49,6 +50,13 @@ def run(dataset, config):
                 n_jobs=n_jobs,
                 log_file_name= flaml_log_file_name,
                 time_budget=time_budget, **training_params)
+
+    with open('model.json', 'a+', encoding='utf-8') as f:
+        f.write(str(aml.model.__dict__) + "\n")
+    
+    import pickle
+    with open(f'mined/{config.name}.pickle', 'wb') as f:
+        pickle.dump(aml.model, f, protocol=HIGHEST_PROTOCOL)
     
     with Timer() as predict:
         predictions = aml.predict(X_test)
