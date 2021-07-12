@@ -9,6 +9,9 @@ from frameworks.shared.callee import call_run, result, output_subdir
 from frameworks.shared.utils import Timer
 
 from sklearn.metrics import roc_auc_score
+from lightgbm.basic import LightGBMError
+
+import numpy as np
 
 log = logging.getLogger(__name__)
 
@@ -19,23 +22,28 @@ def run(dataset, config):
     X_train, y_train = dataset.train.X, dataset.train.y.squeeze()
     X_test, y_test = dataset.test.X, dataset.test.y.squeeze()
 
-    is_classification = config.type == 'classification'
-    
-    if dataset.problem_type != "binary":
-        return {}
-
-    r = open("auc-matrix.csv", "a")
+    if y_train.dtype == "category":
+        y_train = y_train.cat.codes
+        y_test = y_test.cat.codes
 
     for file in os.listdir("mined/"):
         with open("mined/" + file, 'rb') as f:
-            M = pickle.load(f, encoding="utf-8")
-            M.fit(X_train, y_train)
-            P = M.predict_proba(X_test)[:, 1]
-            auc = roc_auc_score(y_test, P)
-            r.write(f"{file}, {config.name}, {auc}\n")
+            try:
+                M = pickle.load(f, encoding="utf-8")
+                try:
+                    M._n_classes = len(np.unique(dataset.train.y.squeeze()))
+                except:
+                    print(type(M))
+                    pass
+                M.fit(X_train, y_train)
+                P = M.predict_proba(X_test)[:, 1]
+                auc = roc_auc_score(y_test, P)
+                r = open(f"auc-matrix.csv", "a+")
+                r.write(f"{file},{config.name},{auc}\n")
+                r.close()
+            except Exception as e:
+                continue
 
-    r.close()
-   
     return {}
 
 
