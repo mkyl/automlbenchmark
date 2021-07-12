@@ -46,3 +46,6 @@ Singularityfile
 #whitelist
 !reports/**/*.csv
 !reports/**/*.png
+
+# summer project specific
+mined/
