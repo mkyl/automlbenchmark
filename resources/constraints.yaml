@@ -32,11 +32,21 @@ test:
   cores: 8
   min_vol_size_mb: 65536
 
+4h1c:
+  folds: 10
+  max_runtime_seconds: 14400
+  cores: 1
+
 8h8c:
   folds: 10
   max_runtime_seconds: 28800
   cores: 8
   min_vol_size_mb: 131072
+
+6h1c:
+  folds: 10
+  max_runtime_seconds: 21600
+  cores: 1
 
 toolarge:
   folds: 10
