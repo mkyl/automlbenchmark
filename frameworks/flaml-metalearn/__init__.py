@@ -13,7 +13,6 @@ def run(dataset, config):
         test=dict(X=dataset.test.X, y=dataset.test.y),
         problem_type=dataset.type.name,
     )
-    options = dict(serialization=dict(sparse_dataframe_deserialized_format="dense"))
 
     return run_in_venv(
         __file__,
@@ -21,5 +20,4 @@ def run(dataset, config):
         input_data=data,
         dataset=dataset,
         config=config,
-        options=options,
     )

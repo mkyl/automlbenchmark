@@ -6,10 +6,14 @@ from flaml import AutoML, __version__
 from frameworks.shared.callee import call_run, result, output_subdir
 from frameworks.shared.utils import Timer
 
+from numpy import random
+
 log = logging.getLogger(__name__)
 
 
 def run(dataset, config):
+    random.seed(539492)
+
     log.info(f"\n**** FLAML [v{__version__}] ****\n")
 
     X_train, y_train = dataset.train.X, dataset.train.y.squeeze()
@@ -53,6 +57,8 @@ def run(dataset, config):
             n_jobs=n_jobs,
             log_file_name=flaml_log_file_name,
             time_budget=time_budget,
+            max_iter=0,
+            retrain_full=False,
             **training_params,
         )
 
