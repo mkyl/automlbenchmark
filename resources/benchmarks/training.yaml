@@ -2,117 +2,156 @@
 
 - name: Australian
   openml_task_id: 146818
+  metric: auc
 
 - name: blood-transfusion
   openml_task_id: 10101
+  metric: auc
 
 - name: car
   openml_task_id: 146821
+  metric: auc_ovo
 
 - name: christine
   openml_task_id: 168908
+  metric: auc
 
 - name: cnae-9
   openml_task_id: 9981
+  metric: auc_ovo
 
 - name: credit-g
   openml_task_id: 31
+  metric: auc
 
 - name: dilbert
   openml_task_id: 168909
+  metric: auc_ovo
 
 - name: fabert
   openml_task_id: 168910
+  metric: auc_ovo
 
 - name: jasmine
   openml_task_id: 168911
+  metric: auc
 
 - name: kc1
   openml_task_id: 3917
+  metric: auc
 
 - name: kr-vs-kp
   openml_task_id: 3
+  metric: auc
 
 - name: mfeat-factors
   openml_task_id: 12
+  metric: auc_ovo
 
 - name: phoneme
   openml_task_id: 9952
+  metric: auc
 
 - name: segment
   openml_task_id: 146822
+  metric: auc_ovo
 
 - name: sylvine
   openml_task_id: 168912
+  metric: auc
 
 - name: vehicle
   openml_task_id: 53
+  metric: auc_ovo
 
 - name: adult
   openml_task_id: 7592
+  metric: auc
 
 - name: Amazon_employee_access
   openml_task_id: 34539
+  metric: auc
 
 - name: APSFailure
   openml_task_id: 168868
+  metric: auc
 
 - name: bank-marketing
   openml_task_id: 14965
+  metric: auc
 
 - name: connect-4
   openml_task_id: 146195
+  metric: auc_ovo
 
 - name: Fashion-MNIST
   openml_task_id: 146825
+  metric: auc_ovo
 
 - name: guillermo
   openml_task_id: 168337
+  metric: auc
 
 - name: Helena
   openml_task_id: 168329
+  metric: auc_ovo
 
 - name: higgs
   openml_task_id: 146606
+  metric: auc
 
 - name: Jannis
   openml_task_id: 168330
+  metric: auc_ovo
 
 - name: jungle_chess_2pcs_raw_endgame_complete
   openml_task_id: 167119
+  metric: auc_ovo
 
 - name: KDDCup09_appetency
   openml_task_id: 3945
+  metric: auc
 
 - name: MiniBooNE
   openml_task_id: 168335
+  metric: auc
 
 - name: nomao
   openml_task_id: 9977
+  metric: auc
 
 - name: numerai28.6
   openml_task_id: 167120
+  metric: auc
 
 - name: riccardo
   openml_task_id: 168338
+  metric: auc
 
 - name: Robert
   openml_task_id: 168332
+  metric: auc_ovo
 
 - name: Shuttle
   openml_task_id: 146212
+  metric: auc_ovo
 
 - name: Volkert
   openml_task_id: 168331
+  metric: auc_ovo
 
 - name: Airlines
   openml_task_id: 189354
+  metric: auc
 
 - name: Albert
   openml_task_id: 189356
+  metric: auc
 
 - name: Covertype
   openml_task_id: 7593
+  metric: auc_ovo
 
 - name: Dionis
   openml_task_id: 189355
+  metric: auc_ovo

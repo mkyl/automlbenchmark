@@ -75,6 +75,12 @@ flaml:
   project: https://github.com/microsoft/FLAML
   refs: [https://arxiv.org/pdf/1911.04706.pdf]
 
+flaml-extract:
+  version: 'stable'
+  description: |
+    Extract good models from the flaml framework.
+  project: https://github.com/microsoft/FLAML
+
 flaml-metalearn:
   version: 'moe/zero-shot'
   description: |
