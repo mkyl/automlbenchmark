@@ -13,8 +13,11 @@ from lightgbm.basic import LightGBMError
 
 log = logging.getLogger(__name__)
 
+from numpy import random
+
 
 def run(dataset, config):
+    random.seed(6713392)
     log.info(f"\n**** Dummy [v0.0.1] ****\n")
 
     X_train, y_train = dataset.train.X, dataset.train.y.squeeze()

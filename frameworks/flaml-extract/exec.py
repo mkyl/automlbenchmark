@@ -9,8 +9,11 @@ from frameworks.shared.utils import Timer
 
 log = logging.getLogger(__name__)
 
+from numpy import random
+
 
 def run(dataset, config):
+    random.seed(5333392)
     log.info(f"\n**** FLAML-extract [v{__version__}] ****\n")
 
     X_train, y_train = dataset.train.X, dataset.train.y.squeeze()
