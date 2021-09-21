@@ -36,11 +36,13 @@ def run(dataset, config):
     M = class_(**stored["hyperparameters"])
 
     automl = AutoML()
-    if hasattr(M, "params") and "objective" in M.params:
-        if config["type_"] == "binary":
-            M.params["objective"] = "binary"
-        else:
-            M.params["objective"] = "multiclass"
+    if (
+        hasattr(M, "params")
+        and "objective" in M.params
+        and (config["type_"] == "binary" or config["type_"] == "multiclass")
+    ):
+        M.params["objective"] = config["type_"]
+
     automl.fit(X_train, y_train, max_iter=0, keep_search_state=True)
     # read from automl task type, set params.
     M.__class__.init()
