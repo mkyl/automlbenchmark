@@ -1,5 +1,6 @@
 import logging
 import os
+import json
 
 from flaml import AutoML, __version__
 
@@ -7,6 +8,7 @@ from frameworks.shared.callee import call_run, result, output_subdir
 from frameworks.shared.utils import Timer
 
 from numpy import random
+import pandas as pd
 
 log = logging.getLogger(__name__)
 
@@ -46,6 +48,19 @@ def run(dataset, config):
         k: v for k, v in config.framework_params.items() if not k.startswith("_")
     }
 
+    if "metafeatures" in training_params:
+        M = pd.read_csv(training_params["metafeatures"], index_col=[0], header=[0])
+        meta_f = M[config.name]
+    else:
+        meta_f = None
+
+    if "portfolio" in training_params:
+        with open(training_params["portfolio"], "r") as f:
+            portfolio = json.load(f)
+    else:
+        # TODO load default portfolio
+        pass
+
     log_dir = output_subdir("logs", config)
     flaml_log_file_name = os.path.join(log_dir, "flaml.log")
     with Timer() as training:
@@ -59,7 +74,9 @@ def run(dataset, config):
             time_budget=time_budget,
             max_iter=0,
             retrain_full=False,
-            **training_params,
+            portfolio=portfolio,
+            metafeatures=meta_f
+            # **training_params
         )
 
     with Timer() as predict:

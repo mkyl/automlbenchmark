@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 HERE=$(dirname "$0")
-VERSION=${1:-"moe/zero-shot"}
-REPO=${2:-"git@ssh.dev.azure.com:v3/msresearch/FLAML/FLAML_research"}
+VERSION=${1:-"main"}
+REPO=${2:-"git@github.com:sonichi/FLAML0.git"}
 PKG=${3:-"flaml"}
 if [[ "$VERSION" == "latest" ]]; then
     VERSION="main"
