@@ -9,6 +9,7 @@ from frameworks.shared.utils import Timer
 
 from numpy import random
 import pandas as pd
+import numpy as np
 
 log = logging.getLogger(__name__)
 
@@ -49,8 +50,10 @@ def run(dataset, config):
     }
 
     if "metafeatures" in training_params:
-        M = pd.read_csv(training_params["metafeatures"], index_col=[0], header=[0])
-        meta_f = M[config.name]
+        meta_f = extract_metafeatures(X_train, y_train)
+        # M = pd.read_csv(training_params["metafeatures"], index_col=[0], header=[0])
+        # M = M[F]
+        # meta_f = M.loc[config.name]
     else:
         meta_f = None
 
@@ -60,6 +63,14 @@ def run(dataset, config):
     else:
         # TODO load default portfolio
         pass
+
+    metalearn = training_params["metalearn"]
+    if metalearn.lower() == "none":
+        metalearn = None
+
+    max_iter = (
+        int(training_params["max_iter"]) if "max_iter" in training_params else 1000000
+    )
 
     log_dir = output_subdir("logs", config)
     flaml_log_file_name = os.path.join(log_dir, "flaml.log")
@@ -72,10 +83,11 @@ def run(dataset, config):
             n_jobs=n_jobs,
             log_file_name=flaml_log_file_name,
             time_budget=time_budget,
-            max_iter=0,
+            max_iter=max_iter,
             retrain_full=False,
             portfolio=portfolio,
-            metafeatures=meta_f
+            metafeatures=meta_f,
+            metalearn=metalearn,
             # **training_params
         )
 
@@ -93,6 +105,15 @@ def run(dataset, config):
         predict_duration=predict.duration,
         probabilities_labels=labels,
     )
+
+
+def extract_metafeatures(X, y):
+    n_row = X.shape[0]
+    n_feat = X.shape[1]
+    # TODO set to 0 if regression task?
+    n_class = y.nunique()
+    pct_num = X.select_dtypes(include=np.number).shape[1] / n_feat
+    return (n_row, n_feat, n_class, pct_num)
 
 
 if __name__ == "__main__":

@@ -82,12 +82,12 @@ flaml-extract:
   project: https://github.com/microsoft/FLAML
 
 flaml-metalearn:
-  version: 'moe/zero-shot'
+  version: 'main'
   description: |
     FLAML is a lightweight Python library that finds accurate machine learning models 
     automatically, efficiently and economically. It frees users from selecting learners 
     and hyperparameters for each learner. It is fast and cheap. 
-  project: https://github.com/microsoft/FLAML
+  project: https://github.com/sonichi/FLAML0
   refs: [https://arxiv.org/pdf/1911.04706.pdf]
 
 dummy:

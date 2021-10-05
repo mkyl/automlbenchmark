@@ -11,6 +11,15 @@ log = logging.getLogger(__name__)
 
 from numpy import random
 
+mapping = {
+    "LGBMEstimator": "lgbm",
+    "CatBoostEstimator": "catboost",
+    "XGBoostSklearnEstimator": "xgboost",
+    "ExtraTreeEstimator": "extra_tree",
+    "LRL1Classifier": "lrl1",
+    "RandomForestEstimator": "rf",
+}
+
 
 def run(dataset, config):
     random.seed(5333392)
@@ -71,7 +80,8 @@ def run(dataset, config):
     with open(training_params["json"], "w", encoding="utf-8") as f:
         j = {
             "class": type(aml.model).__name__,
-            "hyperparameters": aml.model.params,
+            "flaml-name": mapping[type(aml.model).__name__],
+            "hyperparameters": aml.model.get_params(),
         }
         json.dump(j, f, ensure_ascii=False, allow_nan=False, indent=4)
 

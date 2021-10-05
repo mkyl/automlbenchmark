@@ -2,14 +2,13 @@ import logging
 import json
 from time import time
 
-from flaml import AutoML, __version__, model
+from flaml import AutoML, __version__, ml
 
 from frameworks.shared.callee import call_run, result, output_subdir
 from frameworks.shared.utils import Timer
 
-
+import numpy as np
 from sklearn.metrics import roc_auc_score
-from lightgbm.basic import LightGBMError
 
 log = logging.getLogger(__name__)
 
@@ -20,8 +19,16 @@ def run(dataset, config):
     random.seed(6713392)
     log.info(f"\n**** Dummy [v0.0.1] ****\n")
 
+    t1 = time()
+
     X_train, y_train = dataset.train.X, dataset.train.y.squeeze()
     X_test, y_test = dataset.test.X, dataset.test.y.squeeze()
+
+    if "extract-meta" in config.framework_params:
+        mf = extract_metafeatures(X_train, y_train)
+        metaf_file = config.framework_params["extract-meta"]
+        with open(metaf_file, "a+") as f:
+            f.write(config.name + "," + ",".join(str(x) for x in mf) + "\n")
 
     if y_train.dtype == "category":
         y_train = y_train.cat.codes
@@ -31,24 +38,26 @@ def run(dataset, config):
     with open(model_json, "r") as f:
         stored = json.load(f)
 
-    class_ = getattr(model, stored["class"])
-    print(class_)
-    M = class_(**stored["hyperparameters"])
+    stored["hyperparameters"].pop("objective", None)
+    stored["hyperparameters"].pop("task", None)
+
+    mapping = {"binary": "binary", "multiclass": "multi", "regression": "regression"}
+
+    class_ = ml.get_estimator_class(config, stored["flaml-name"])
+    M = class_(**stored["hyperparameters"], task=mapping[config.type_])
 
     automl = AutoML()
-    if (
-        hasattr(M, "params")
-        and "objective" in M.params
-        and (config["type_"] == "binary" or config["type_"] == "multiclass")
-    ):
-        M.params["objective"] = config["type_"]
 
-    automl.fit(X_train, y_train, max_iter=0, keep_search_state=True)
+    automl.fit(X_train, y_train, max_iter=0, keep_search_state=True, task=config.type)
     # read from automl task type, set params.
     M.__class__.init()
-    t1 = time()
-    M.fit(automl._X_train_all, automl._y_train_all, budget=config.max_runtime_seconds)
-    t2 = time()
+
+    t3 = time()
+    M.fit(
+        automl._X_train_all,
+        automl._y_train_all,
+        budget=config.max_runtime_seconds - (t3 - t1),
+    )
     automl._trained_estimator = M
 
     P = automl.predict_proba(X_test)
@@ -57,10 +66,19 @@ def run(dataset, config):
     score = 1 - roc_auc_score(y_test, P, multi_class="ovo")
 
     r = open(config.framework_params["output"], "a+")
-    r.write(f"{model_json},{config.name},{score}\n")
+    r.write(f"{model_json},{config.name},{config.fold},{score}\n")
     r.close()
 
     return result()
+
+
+def extract_metafeatures(X, y):
+    n_row = X.shape[0]
+    n_feat = X.shape[1]
+    # TODO set to 0 if regression task?
+    n_class = y.nunique()
+    pct_num = X.select_dtypes(include=np.number).shape[1] / n_feat
+    return (n_row, n_feat, n_class, pct_num)
 
 
 if __name__ == "__main__":

@@ -15,9 +15,5 @@ def run(dataset, config):
     )
 
     return run_in_venv(
-        __file__,
-        "exec.py",
-        input_data=data,
-        dataset=dataset,
-        config=config,
+        __file__, "exec.py", input_data=data, dataset=dataset, config=config
     )
