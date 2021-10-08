@@ -1,0 +1,58 @@
+---
+
+- name: car
+  openml_task_id: 146821
+  metric: auc_ovo
+
+- name: cnae-9
+  openml_task_id: 9981
+  metric: auc_ovo
+
+- name: dilbert
+  openml_task_id: 168909
+  metric: auc_ovo
+
+- name: fabert
+  openml_task_id: 168910
+  metric: auc_ovo
+
+- name: mfeat-factors
+  openml_task_id: 12
+  metric: auc_ovo
+
+- name: vehicle
+  openml_task_id: 53
+  metric: auc_ovo
+
+- name: connect-4
+  openml_task_id: 146195
+  metric: auc_ovo
+
+- name: Fashion-MNIST
+  openml_task_id: 146825
+  metric: auc_ovo
+
+- name: Helena
+  openml_task_id: 168329
+  metric: auc_ovo
+
+- name: jungle_chess_2pcs_raw_endgame_complete
+  openml_task_id: 167119
+  metric: auc_ovo
+
+- name: Robert
+  metric: auc_ovo
+  openml_task_id: 168332
+
+- name: Shuttle
+  openml_task_id: 146212
+  metric: auc_ovo
+
+- name: Covertype
+  openml_task_id: 7593
+  metric: auc_ovo
+
+- name: Dionis
+  openml_task_id: 189355
+  metric: auc_ovo
+ 

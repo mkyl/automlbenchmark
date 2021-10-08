@@ -8,29 +8,13 @@
   openml_task_id: 10101
   metric: auc
 
-- name: car
-  openml_task_id: 146821
-  metric: auc_ovo
-
 - name: christine
   openml_task_id: 168908
   metric: auc
 
-- name: cnae-9
-  openml_task_id: 9981
-  metric: auc_ovo
-
 - name: credit-g
   openml_task_id: 31
   metric: auc
-
-- name: dilbert
-  openml_task_id: 168909
-  metric: auc_ovo
-
-- name: fabert
-  openml_task_id: 168910
-  metric: auc_ovo
 
 - name: kc1
   openml_task_id: 3917
@@ -39,14 +23,6 @@
 - name: kr-vs-kp
   openml_task_id: 3
   metric: auc
-
-- name: mfeat-factors
-  openml_task_id: 12
-  metric: auc_ovo
-
-- name: vehicle
-  openml_task_id: 53
-  metric: auc_ovo
 
 - name: adult
   openml_task_id: 7592
@@ -60,25 +36,9 @@
   openml_task_id: 14965
   metric: auc
 
-- name: connect-4
-  openml_task_id: 146195
-  metric: auc_ovo
-
-- name: Fashion-MNIST
-  openml_task_id: 146825
-  metric: auc_ovo
-
-- name: Helena
-  openml_task_id: 168329
-  metric: auc_ovo
-
 - name: higgs
   openml_task_id: 146606
   metric: auc
-
-- name: jungle_chess_2pcs_raw_endgame_complete
-  openml_task_id: 167119
-  metric: auc_ovo
 
 - name: MiniBooNE
   openml_task_id: 168335
@@ -96,14 +56,6 @@
   openml_task_id: 168338
   metric: auc
 
-- name: Robert
-  metric: auc_ovo
-  openml_task_id: 168332
-
-- name: Shuttle
-  openml_task_id: 146212
-  metric: auc_ovo
-
 - name: Airlines
   openml_task_id: 189354
   metric: auc
@@ -111,11 +63,3 @@
 - name: Albert
   openml_task_id: 189356
   metric: auc
-
-- name: Covertype
-  openml_task_id: 7593
-  metric: auc_ovo
-
-- name: Dionis
-  openml_task_id: 189355
-  metric: auc_ovo
