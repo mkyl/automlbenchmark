@@ -15,6 +15,7 @@ mapping = {
     "LGBMEstimator": "lgbm",
     "CatBoostEstimator": "catboost",
     "XGBoostSklearnEstimator": "xgboost",
+    "XGBoostEstimator": "xgboost",
     "ExtraTreeEstimator": "extra_tree",
     "LRL1Classifier": "lrl1",
     "RandomForestEstimator": "rf",

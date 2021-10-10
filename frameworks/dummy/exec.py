@@ -8,7 +8,7 @@ from frameworks.shared.callee import call_run, result, output_subdir
 from frameworks.shared.utils import Timer
 
 import numpy as np
-from sklearn.metrics import roc_auc_score
+from sklearn.metrics import roc_auc_score, r2_score
 
 log = logging.getLogger(__name__)
 
@@ -23,6 +23,8 @@ def run(dataset, config):
 
     X_train, y_train = dataset.train.X, dataset.train.y.squeeze()
     X_test, y_test = dataset.test.X, dataset.test.y.squeeze()
+
+    is_classification = config.type == "classification"
 
     if "extract-meta" in config.framework_params:
         mf = extract_metafeatures(X_train, y_train)
@@ -60,10 +62,14 @@ def run(dataset, config):
     )
     automl._trained_estimator = M
 
-    P = automl.predict_proba(X_test)
-    if config["type_"] == "binary":
-        P = P[:, 1]
-    score = 1 - roc_auc_score(y_test, P, multi_class="ovo")
+    if is_classification:
+        P = automl.predict_proba(X_test)
+        if config["type_"] == "binary":
+            P = P[:, 1]
+        score = 1 - roc_auc_score(y_test, P, multi_class="ovo")
+    else:
+        P = automl.predict(X_test)
+        score = r2_score(y_test, P)
 
     r = open(config.framework_params["output"], "a+")
     r.write(f"{model_json},{config.name},{config.fold},{score}\n")
