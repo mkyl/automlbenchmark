@@ -27,7 +27,7 @@ def run(dataset, config):
     is_classification = config.type == "classification"
 
     if "extract-meta" in config.framework_params:
-        mf = extract_metafeatures(X_train, y_train)
+        mf = extract_metafeatures(X_train, y_train, is_classification)
         metaf_file = config.framework_params["extract-meta"]
         with open(metaf_file, "a+") as f:
             f.write(config.name + "," + ",".join(str(x) for x in mf) + "\n")
@@ -69,7 +69,7 @@ def run(dataset, config):
         score = 1 - roc_auc_score(y_test, P, multi_class="ovo")
     else:
         P = automl.predict(X_test)
-        score = r2_score(y_test, P)
+        score = 1 - r2_score(y_test, P)
 
     r = open(config.framework_params["output"], "a+")
     r.write(f"{model_json},{config.name},{config.fold},{score}\n")
@@ -78,11 +78,10 @@ def run(dataset, config):
     return result()
 
 
-def extract_metafeatures(X, y):
+def extract_metafeatures(X, y, classification):
     n_row = X.shape[0]
     n_feat = X.shape[1]
-    # TODO set to 0 if regression task?
-    n_class = y.nunique()
+    n_class = y.nunique() if classification else 0
     pct_num = X.select_dtypes(include=np.number).shape[1] / n_feat
     return (n_row, n_feat, n_class, pct_num)
 
