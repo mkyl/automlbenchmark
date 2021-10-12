@@ -76,7 +76,7 @@ flaml:
   refs: [https://arxiv.org/pdf/1911.04706.pdf]
 
 flaml-extract:
-  version: 'stable'
+  version: '0.6.5'
   description: |
     Extract good models from the flaml framework.
   project: https://github.com/microsoft/FLAML
@@ -91,7 +91,7 @@ flaml-metalearn:
   refs: [https://arxiv.org/pdf/1911.04706.pdf]
 
 dummy:
-  version: 'stable'
+  version: '0.6.5'
   description: |
     FLAML is a lightweight Python library that finds accurate machine learning models 
     automatically, efficiently and economically. It frees users from selecting learners 
