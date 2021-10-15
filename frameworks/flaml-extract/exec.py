@@ -84,6 +84,8 @@ def run(dataset, config):
             "flaml-name": mapping[type(aml.model).__name__],
             "hyperparameters": aml.model.get_params(),
         }
+        if hasattr(aml.model, "_n_estimators"):
+            j["hyperparameters"]["n_estimators"] = aml.model._n_estimators
         json.dump(j, f, ensure_ascii=False, allow_nan=False, indent=4)
 
     with Timer() as predict:

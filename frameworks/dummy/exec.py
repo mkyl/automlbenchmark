@@ -45,7 +45,7 @@ def run(dataset, config):
 
     mapping = {"binary": "binary", "multiclass": "multi", "regression": "regression"}
 
-    class_ = ml.get_estimator_class(config, stored["flaml-name"])
+    class_ = ml.get_estimator_class(config.type, stored["flaml-name"])
     M = class_(**stored["hyperparameters"], task=mapping[config.type_])
 
     automl = AutoML()
@@ -61,21 +61,40 @@ def run(dataset, config):
         budget=config.max_runtime_seconds - (t3 - t1),
     )
     automl._trained_estimator = M
+    t4 = time()
 
+    print(M._n_estimators)
+
+    predictions = automl.predict(X_test)
     if is_classification:
-        P = automl.predict_proba(X_test)
+        probabilities = automl.predict_proba(X_test)
         if config["type_"] == "binary":
-            P = P[:, 1]
-        score = 1 - roc_auc_score(y_test, P, multi_class="ovo")
+            score = 1 - roc_auc_score(y_test, probabilities[:, 1], multi_class="ovo")
+        else:
+            score = 1 - roc_auc_score(y_test, probabilities, multi_class="ovo")
     else:
-        P = automl.predict(X_test)
-        score = 1 - r2_score(y_test, P)
+        probabilities = None
+        score = 1 - r2_score(y_test, predictions)
+
+    t5 = time()
 
     r = open(config.framework_params["output"], "a+")
     r.write(f"{model_json},{config.name},{config.fold},{score}\n")
     r.close()
 
-    return result()
+    labels = automl.classes_ if is_classification else None
+
+    return result(
+        output_file=config.output_predictions_file,
+        probabilities=probabilities,
+        predictions=predictions,
+        truth=y_test,
+        models_count=1,
+        training_duration=t4 - t3,
+        predict_duration=t5 - t4,
+        probabilities_labels=labels,
+        model_name=model_json,
+    )
 
 
 def extract_metafeatures(X, y, classification):
