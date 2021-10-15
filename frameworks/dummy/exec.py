@@ -63,8 +63,6 @@ def run(dataset, config):
     automl._trained_estimator = M
     t4 = time()
 
-    print(M._n_estimators)
-
     predictions = automl.predict(X_test)
     if is_classification:
         probabilities = automl.predict_proba(X_test)
