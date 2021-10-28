@@ -17,23 +17,3 @@
 - name: house_8L
   openml_task_id: 2309
   metric: r2
-
-- name: bng_autoHorse
-  openml_task_id: 7319
-  metric: r2
-
-- name: online_news
-  openml_task_id: 359941
-  metric: r2
-
-- name: new_fuel_car
-  openml_task_id: 168869
-  metric: r2
-
-- name: medical_charges
-  openml_task_id: 360967
-  metric: r2
-
-- name: mnist_rotation
-  openml_task_id: 167218
-  metric: r2

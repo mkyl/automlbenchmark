@@ -1,30 +1,37 @@
 - name: pol
   openml_task_id: 2292
-  metric: r2
+  metric:
+    - r2
 
 - name: 2dplanes
   openml_task_id: 2306
-  metric: r2
+  metric:
+    - r2
 
 - name: bng_echomonths
   openml_task_id: 7323
-  metric: r2
+  metric:
+    - r2
 
 - name: bng_lowbwt
   openml_task_id: 7320
-  metric: r2
+  metric:
+    - r2
 
 - name: bng_pbc
   openml_task_id: 7318
-  metric: r2
+  metric:
+    - r2
 
 - name: bng_pharynx
   openml_task_id: 7322
-  metric: r2
+  metric:
+    - r2
 
 - name: fried
   openml_task_id: 4885
-  metric: r2
+  metric:
+      - r2
 
 - name: houses
   openml_task_id: 5165
@@ -33,96 +40,5 @@
 
 - name: mv
   openml_task_id: 4774
-  metric: r2
-
-- name: cpu_act
-  openml_task_id: 4892
-  metric: r2
-
-- name: bng_autoPrice
-  openml_task_id: 7321
-  metric: r2
-
-- name: elevators
-  openml_task_id: 2307
-  metric: r2
-
-- name: house_sales
-  openml_task_id: 359949
-  metric: r2
-
-- name: brazil_houses
-  openml_task_id: 359938
-  metric: r2
-
-- name: bng_satellite
-  openml_task_id: 7326
-  metric: r2
-
-- name: airlines_depdelay
-  openml_task_id: 359926
-  metric: r2
-
-- name: allstate_claims
-  openml_task_id: 233212
-  metric: r2
-
-- name: black_friday
-  openml_task_id: 168891
-  metric: r2
-
-- name: buzz_twitter
-  openml_task_id: 233213
-  metric: r2
-
-- name: ailerons
-  openml_task_id: 4769
-  metric: r2
-
-- name: comet
-  openml_task_id: 14949
-  metric: r2
-
-- name: rainfall_bangladesh
-  openml_task_id: 168889
-  metric: r2
-
-- name: bng_libras_move
-  openml_task_id: 7327
-  metric: r2
-
-- name: dataset_sales
-  openml_task_id: 190418
-  metric: r2
-
-- name: diamonds
-  openml_task_id: 233211
-  metric: r2
-
-- name: Yolanda
-  openml_task_id: 317614
-  metric: r2
-
-- name: nyc_taxi
-  openml_task_id: 359943
-  metric: r2
-
-- name: bike_sharing_demand
-  openml_task_id: 317615
-  metric: r2
-
-- name: sulfur
-  openml_task_id: 360966
-  metric: r2
-
-- name: nasa_phm
-  openml_task_id: 360879
-  metric: r2
-
-- name: particulate-matter
-  openml_task_id: 360968
-  metric: r2
-
-- name: miami_houses
-  openml_task_id: 360969
-  metric: r2
+  metric:
+    - r2
