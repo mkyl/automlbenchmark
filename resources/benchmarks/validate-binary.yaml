@@ -3,25 +3,13 @@
   openml_task_id: 168911
   metric: auc
 
-- name: segment
-  openml_task_id: 146822
-  metric: auc_ovo
-
 - name: guillermo
   openml_task_id: 168337
   metric: auc
 
-- name: Volkert
-  openml_task_id: 168331
-  metric: auc_ovo
-
 - name: KDDCup09_appetency
   openml_task_id: 3945
   metric: auc
-
-- name: Jannis
-  openml_task_id: 168330
-  metric: auc_ovo
 
 - name: Amazon_employee_access
   openml_task_id: 34539

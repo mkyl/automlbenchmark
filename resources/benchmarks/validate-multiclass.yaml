@@ -1,0 +1,13 @@
+---
+- name: segment
+  openml_task_id: 146822
+  metric: auc_ovo
+
+- name: Volkert
+  openml_task_id: 168331
+  metric: auc_ovo
+
+- name: Jannis
+  openml_task_id: 168330
+  metric: auc_ovo
+
